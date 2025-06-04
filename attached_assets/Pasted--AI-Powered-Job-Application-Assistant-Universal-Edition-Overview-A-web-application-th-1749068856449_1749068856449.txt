@@ -1,0 +1,136 @@
+# AI-Powered Job Application Assistant (Universal Edition)
+
+## 🚀 Overview
+
+A web application that helps _anyone_ streamline the job application process by:
+
+- Scoring resume/job description compatibility (ATS-style)
+- Automatically tailoring resumes using AI (OpenAI API)
+- Generating personalized cover letters for each job
+- Tracking job applications and follow-ups
+
+## 🎯 Key Features
+
+### 1. Resume + Job Description Input
+
+- Upload or paste a resume (PDF/text)
+- Paste or scrape a job description
+- Auto-parses and cleans the data for keyword extraction
+
+### 2. Job Fit Scoring (ATS Match)
+
+- Compares resume and job description for keyword overlap
+- Scores match (e.g., "72% match")
+- Highlights missing skills or key terms
+
+### 3. AI Resume Tailoring
+
+- Uses OpenAI API to rewrite resumes specifically for the job description
+- Customizes based on selected field/industry
+- Preserves formatting, tone, and structure
+
+### 4. AI Cover Letter Generation
+
+- One-click generation of a job-specific cover letter
+- Tone adjustment options: professional, casual, persuasive
+- Editable and downloadable
+
+### 5. Application Tracker
+
+- Save applied jobs with status (e.g., Applied, Interviewing, Ghosted)
+- Add recruiter contact and follow-up notes
+
+## 🔄 Universal Use Support
+
+### Field Selection
+
+- Dropdown to select field (e.g., Psychology, Tech, Healthcare, Marketing)
+- Prompts dynamically change to suit industry norms
+
+### Soft Skill Emphasis
+
+- Highlights interpersonal, organizational, leadership skills
+- Supports resumes for non-technical fields
+
+### Beginner-Friendly Flow
+
+- Onboarding step: choose “No resume,” “Improve resume,” or “Apply to jobs”
+- Guided steps for each stage of the job hunt
+
+## 🧱 Tech Stack
+
+| Component    | Tech                           |
+| ------------ | ------------------------------ |
+| Frontend     | Next.js (React), Tailwind CSS  |
+| Backend      | Firebase Functions             |
+| Auth         | Firebase Auth                  |
+| Database     | Firebase Firestore             |
+| File Parsing | pdf-parse or custom parser     |
+| AI           | OpenAI GPT-4 API               |
+| Hosting      | Vercel                         |
+| File Storage | Firebase Storage (for resumes) |
+
+## 📄 Core Pages
+
+- `/`: Home page, upload resume/paste job, get match
+- `/editor`: Tailored resume viewer/editor
+- `/cover-letter`: AI cover letter generation & customization
+- `/tracker`: Dashboard to view jobs you've applied to
+
+## 🔜 Phase 2 Features
+
+- Chrome Extension for saving jobs from LinkedIn/Indeed
+- DM Generator for LinkedIn outreach
+- Resume Starter Kits for popular roles (new grads, career changers, etc.)
+- Voice Input for mobile users
+
+## 🧠 AI Prompt System (Dynamic by Field)
+
+Example prompt structure for tailoring:
+
+```
+You are an AI resume coach helping a {field} applicant improve their resume for this job: {job_description}. Rewrite the following resume to highlight relevant skills and match keywords, while keeping it professional and ATS-friendly.
+```
+
+## ✅ Next Steps
+
+1. Build upload and paste job UI
+2. Connect OpenAI API for resume tailoring
+3. Add match scoring logic and front-end display
+4. Create job tracker with Firestore
+
+## Theme and font:
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+theme: {
+extend: {
+colors: {
+light: {
+background: '#FFFDF9',
+primary: '#E06C5A',
+accent: '#F8CBA6',
+text: '#4A4A4A',
+heading: '#1C1C1C',
+card: '#FFFFFF',
+border: '#EDEDED',
+},
+dark: {
+background: '#121212',
+primary: '#FF8C6C',
+accent: '#FFD5B1',
+text: '#BBBBBB',
+heading: '#FFFFFF',
+card: '#1F1F1F',
+border: '#2A2A2A',
+},
+},
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+},
+},
+}
+
+---
+
+**Made for universal job seekers. Built by a developer who’s lived it.**

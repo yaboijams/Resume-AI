@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Light theme */
+  --background: 253 252 255; /* #FDFCFF */
+  --foreground: 55 65 81; /* #374151 */
+  --card: 255 255 255; /* #FFFFFF */
+  --card-foreground: 55 65 81; /* #374151 */
+  --popover: 255 255 255; /* #FFFFFF */
+  --popover-foreground: 55 65 81; /* #374151 */
+  --primary: 124 58 237; /* #7C3AED */
+  --primary-foreground: 255 255 255; /* #FFFFFF */
+  --secondary: 168 85 247; /* #A855F7 */
+  --secondary-foreground: 255 255 255; /* #FFFFFF */
+  --muted: 249 250 251; /* #F9FAFB */
+  --muted-foreground: 107 114 128; /* #6B7280 */
+  --accent: 221 214 254; /* #DDD6FE */
+  --accent-foreground: 55 65 81; /* #374151 */
+  --destructive: 239 68 68; /* #EF4444 */
+  --destructive-foreground: 255 255 255; /* #FFFFFF */
+  --border: 229 231 235; /* #E5E7EB */
+  --input: 229 231 235; /* #E5E7EB */
+  --ring: 124 58 237; /* #7C3AED */
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* Dark theme */
+  --background: 30 27 46; /* #1E1B2E */
+  --foreground: 209 213 219; /* #D1D5DB */
+  --card: 45 36 56; /* #2D2438 */
+  --card-foreground: 209 213 219; /* #D1D5DB */
+  --popover: 45 36 56; /* #2D2438 */
+  --popover-foreground: 209 213 219; /* #D1D5DB */
+  --primary: 168 85 247; /* #A855F7 */
+  --primary-foreground: 255 255 255; /* #FFFFFF */
+  --secondary: 192 132 252; /* #C084FC */
+  --secondary-foreground: 255 255 255; /* #FFFFFF */
+  --muted: 55 65 81; /* #374151 */
+  --muted-foreground: 156 163 175; /* #9CA3AF */
+  --accent: 107 70 193; /* #6B46C1 */
+  --accent-foreground: 255 255 255; /* #FFFFFF */
+  --destructive: 239 68 68; /* #EF4444 */
+  --destructive-foreground: 255 255 255; /* #FFFFFF */
+  --border: 75 85 99; /* #4B5563 */
+  --input: 75 85 99; /* #4B5563 */
+  --ring: 168 85 247; /* #A855F7 */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-foreground font-semibold;
+  }
+}
+
+@layer components {
+  .premium-shadow {
+    box-shadow: 0 20px 25px -5px rgba(124, 58, 237, 0.1), 0 10px 10px -5px rgba(124, 58, 237, 0.04);
+  }
+
+  .premium-shadow-lg {
+    box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.15);
+  }
+
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
+
+  .gradient-card {
+    @apply bg-gradient-to-br from-card to-muted;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
