@@ -182,7 +182,7 @@ export default function CoverLetterGenerator({ resumeId, jobDescription }: Cover
                   Fill in the company details and click "Generate Cover Letter" to create a personalized cover letter.
                 </p>
                 {(!resumeId || !jobDescription) && (
-                  <p className="text-sm text-yellow-600 dark:text-yellow-400">
+                  <p className="text-sm text-orange-600 dark:text-orange-400">
                     Please upload a resume and add a job description first.
                   </p>
                 )}

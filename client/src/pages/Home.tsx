@@ -89,7 +89,7 @@ export default function Home() {
         </div>
         <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
           Land Your Dream Job with{" "}
-          <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <span className="text-gradient">
             AI Precision
           </span>
         </h1>

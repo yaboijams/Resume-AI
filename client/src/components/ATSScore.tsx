@@ -20,13 +20,13 @@ export default function ATSScore({
 }: ATSScoreProps) {
   const getScoreColor = (score: number) => {
     if (score >= 80) return "text-green-600 dark:text-green-400";
-    if (score >= 60) return "text-yellow-600 dark:text-yellow-400";
+    if (score >= 60) return "text-orange-600 dark:text-orange-400";
     return "text-red-600 dark:text-red-400";
   };
 
   const getScoreBackground = (score: number) => {
     if (score >= 80) return "from-green-500 to-emerald-500";
-    if (score >= 60) return "from-yellow-500 to-orange-500";
+    if (score >= 60) return "from-orange-500 to-amber-500";
     return "from-red-500 to-pink-500";
   };
 
@@ -126,12 +126,12 @@ export default function ATSScore({
         {missingKeywords.length > 0 && (
           <div className="space-y-2">
             <div className="flex items-center space-x-2">
-              <AlertCircle className="w-4 h-4 text-yellow-500" />
+              <AlertCircle className="w-4 h-4 text-orange-500" />
               <span className="text-sm font-medium text-foreground">Missing Keywords</span>
             </div>
             <div className="flex flex-wrap gap-1">
               {missingKeywords.slice(0, 5).map((keyword, index) => (
-                <Badge key={index} variant="outline" className="text-xs border-yellow-300 text-yellow-700 dark:text-yellow-300">
+                <Badge key={index} variant="outline" className="text-xs border-orange-300 text-orange-700 dark:text-orange-300">
                   {keyword}
                 </Badge>
               ))}

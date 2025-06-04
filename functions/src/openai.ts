@@ -185,4 +185,4 @@ Respond with valid JSON array only.
     console.error('Error generating AI suggestions:', error);
     return [];
   }
-}
+} 

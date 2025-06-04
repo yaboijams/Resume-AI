@@ -4,7 +4,9 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { useAuth } from "@/hooks/useAuth";
 import Navigation from "@/components/Navigation";
+import Auth from "@/components/Auth";
 import Home from "@/pages/Home";
 import Editor from "@/pages/Editor";
 import CoverLetter from "@/pages/CoverLetter";
@@ -12,6 +14,20 @@ import Tracker from "@/pages/Tracker";
 import NotFound from "@/pages/not-found";
 
 function Router() {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Auth />;
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />

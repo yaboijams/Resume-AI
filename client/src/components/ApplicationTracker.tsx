@@ -59,7 +59,7 @@ export default function ApplicationTracker() {
       case 'applied':
         return 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300';
       case 'interview':
-        return 'bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300';
+        return 'bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300';
       case 'offer':
         return 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300';
       case 'rejected':
@@ -126,7 +126,7 @@ export default function ApplicationTracker() {
           <div className="text-sm text-muted-foreground">Pending</div>
         </Card>
         <Card className="p-4 text-center">
-          <div className="text-2xl font-bold text-yellow-600">{stats.interviews}</div>
+          <div className="text-2xl font-bold text-purple-600">{stats.interviews}</div>
           <div className="text-sm text-muted-foreground">Interviews</div>
         </Card>
         <Card className="p-4 text-center">

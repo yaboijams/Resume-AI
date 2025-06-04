@@ -20,7 +20,7 @@ export function ATSScore({
 }: ATSScoreProps) {
   const getScoreColor = (score: number) => {
     if (score >= 80) return '#10B981'; // green
-    if (score >= 60) return '#F59E0B'; // yellow
+    if (score >= 60) return '#EA580C'; // orange
     return '#EF4444'; // red
   };
 

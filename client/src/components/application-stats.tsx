@@ -69,8 +69,8 @@ export function ApplicationStats() {
       label: "Interviewing", 
       value: stats.interviewing,
       icon: Calendar,
-      color: "text-yellow-600 dark:text-yellow-400",
-      bgColor: "bg-yellow-100 dark:bg-yellow-900/30",
+      color: "text-purple-600 dark:text-purple-400",
+      bgColor: "bg-purple-100 dark:bg-purple-900/30",
     },
     {
       label: "Hired",

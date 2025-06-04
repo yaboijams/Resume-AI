@@ -1,101 +1,106 @@
-import { pgTable, text, serial, integer, boolean, timestamp, jsonb, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { Timestamp } from "firebase/firestore";
 
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
-  email: text("email"),
-  createdAt: timestamp("created_at").defaultNow(),
+// Base types for Firestore documents
+export interface FirestoreDoc {
+  id: string;
+  createdAt: Timestamp;
+  updatedAt?: Timestamp;
+}
+
+// User schema
+export const insertUserSchema = z.object({
+  email: z.string().email(),
+  displayName: z.string().optional(),
+  photoURL: z.string().optional(),
 });
 
-export const resumes = pgTable("resumes", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id").references(() => users.id),
-  originalContent: text("original_content").notNull(),
-  fileName: text("file_name"),
-  field: text("field"), // Technology, Healthcare, Marketing, etc.
-  createdAt: timestamp("created_at").defaultNow(),
+export const userSchema = insertUserSchema.extend({
+  id: z.string(),
+  createdAt: z.any(), // Firestore Timestamp
+  updatedAt: z.any().optional(),
 });
 
-export const jobs = pgTable("jobs", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id").references(() => users.id),
-  title: text("title").notNull(),
-  company: text("company").notNull(),
-  description: text("description").notNull(),
-  url: text("url"),
-  createdAt: timestamp("created_at").defaultNow(),
+// Resume schema
+export const insertResumeSchema = z.object({
+  originalContent: z.string(),
+  fileName: z.string().optional(),
+  field: z.string().optional(),
 });
 
-export const applications = pgTable("applications", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id").references(() => users.id),
-  jobId: integer("job_id").references(() => jobs.id),
-  resumeId: integer("resume_id").references(() => resumes.id),
-  status: text("status").notNull().default("applied"), // applied, interview, rejected, offer
-  matchScore: integer("match_score"), // ATS match percentage
-  tailoredResumeContent: text("tailored_resume_content"),
-  coverLetter: text("cover_letter"),
-  notes: text("notes"),
-  appliedAt: timestamp("applied_at").defaultNow(),
-  followUpDate: timestamp("follow_up_date"),
+export const resumeSchema = insertResumeSchema.extend({
+  id: z.string(),
+  userId: z.string(),
+  createdAt: z.any(), // Firestore Timestamp
+  updatedAt: z.any().optional(),
 });
 
-export const aiSuggestions = pgTable("ai_suggestions", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id").references(() => users.id),
-  type: text("type").notNull(), // resume_improvement, skill_addition, etc.
-  suggestion: text("suggestion").notNull(),
-  applied: boolean("applied").default(false),
-  createdAt: timestamp("created_at").defaultNow(),
+// Job schema
+export const insertJobSchema = z.object({
+  title: z.string(),
+  company: z.string(),
+  description: z.string(),
+  url: z.string().optional(),
 });
 
-// Insert schemas
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
-  email: true,
+export const jobSchema = insertJobSchema.extend({
+  id: z.string(),
+  userId: z.string(),
+  createdAt: z.any(), // Firestore Timestamp
+  updatedAt: z.any().optional(),
 });
 
-export const insertResumeSchema = createInsertSchema(resumes).pick({
-  originalContent: true,
-  fileName: true,
-  field: true,
+// Application schema
+export const insertApplicationSchema = z.object({
+  jobId: z.string(),
+  resumeId: z.string(),
+  status: z.enum(['applied', 'interview', 'rejected', 'offer']).default('applied'),
+  matchScore: z.number().optional(),
+  tailoredResumeContent: z.string().optional(),
+  coverLetter: z.string().optional(),
+  notes: z.string().optional(),
+  followUpDate: z.any().optional(), // Firestore Timestamp
 });
 
-export const insertJobSchema = createInsertSchema(jobs).pick({
-  title: true,
-  company: true,
-  description: true,
-  url: true,
+export const applicationSchema = insertApplicationSchema.extend({
+  id: z.string(),
+  userId: z.string(),
+  appliedAt: z.any(), // Firestore Timestamp
+  createdAt: z.any(), // Firestore Timestamp
+  updatedAt: z.any().optional(),
 });
 
-export const insertApplicationSchema = createInsertSchema(applications).pick({
-  jobId: true,
-  resumeId: true,
-  status: true,
-  matchScore: true,
-  tailoredResumeContent: true,
-  coverLetter: true,
-  notes: true,
-  followUpDate: true,
+// AI Suggestion schema
+export const insertAISuggestionSchema = z.object({
+  type: z.string(),
+  suggestion: z.string(),
 });
 
-export const insertAISuggestionSchema = createInsertSchema(aiSuggestions).pick({
-  type: true,
-  suggestion: true,
+export const aiSuggestionSchema = insertAISuggestionSchema.extend({
+  id: z.string(),
+  userId: z.string(),
+  applied: z.boolean().default(false),
+  createdAt: z.any(), // Firestore Timestamp
+  updatedAt: z.any().optional(),
 });
 
 // Types
-export type User = typeof users.$inferSelect;
+export type User = z.infer<typeof userSchema>;
 export type InsertUser = z.infer<typeof insertUserSchema>;
-export type Resume = typeof resumes.$inferSelect;
+export type Resume = z.infer<typeof resumeSchema>;
 export type InsertResume = z.infer<typeof insertResumeSchema>;
-export type Job = typeof jobs.$inferSelect;
+export type Job = z.infer<typeof jobSchema>;
 export type InsertJob = z.infer<typeof insertJobSchema>;
-export type Application = typeof applications.$inferSelect;
+export type Application = z.infer<typeof applicationSchema>;
 export type InsertApplication = z.infer<typeof insertApplicationSchema>;
-export type AISuggestion = typeof aiSuggestions.$inferSelect;
+export type AISuggestion = z.infer<typeof aiSuggestionSchema>;
 export type InsertAISuggestion = z.infer<typeof insertAISuggestionSchema>;
+
+// Firestore collection names
+export const COLLECTIONS = {
+  USERS: 'users',
+  RESUMES: 'resumes',
+  JOBS: 'jobs',
+  APPLICATIONS: 'applications',
+  AI_SUGGESTIONS: 'aiSuggestions',
+} as const;
