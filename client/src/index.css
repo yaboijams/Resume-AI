@@ -185,4 +185,65 @@
   .border-purple-secondary {
     border-color: rgb(168, 85, 247);
   }
+
+  /* AGGRESSIVE COLOR OVERRIDES - Force Purple Theme */
+  
+  /* Force all text to use proper colors */
+  h1, h2, h3, h4, h5, h6 {
+    color: rgb(31, 41, 55) !important;
+  }
+  
+  /* Force gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, rgb(124, 58, 237), rgb(168, 85, 247)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+  }
+  
+  /* Override any yellow colors */
+  [style*="yellow"], 
+  [class*="yellow"],
+  .text-yellow-500,
+  .text-yellow-600,
+  .bg-yellow-500,
+  .bg-yellow-600 {
+    color: rgb(124, 58, 237) !important;
+    background-color: transparent !important;
+  }
+  
+  /* Force proper text colors */
+  .text-foreground {
+    color: rgb(31, 41, 55) !important;
+  }
+  
+  .text-muted-foreground {
+    color: rgb(107, 114, 128) !important;
+  }
+  
+  .text-primary {
+    color: rgb(124, 58, 237) !important;
+  }
+  
+  /* Force proper button colors */
+  .gradient-primary {
+    background: linear-gradient(135deg, rgb(124, 58, 237), rgb(168, 85, 247)) !important;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, rgb(124, 58, 237), rgb(168, 85, 247)) !important;
+    color: white !important;
+  }
+  
+  /* Force card backgrounds */
+  .bg-card {
+    background-color: rgb(255, 255, 255) !important;
+  }
+  
+  /* Force body colors */
+  body {
+    background-color: rgb(255, 255, 255) !important;
+    color: rgb(31, 41, 55) !important;
+  }
 }
