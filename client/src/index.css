@@ -26,6 +26,13 @@
   --input: 229 231 235; /* Gray-200 */
   --ring: 124 58 237; /* Violet-600 */
   --radius: 0.75rem;
+  
+  /* Chart colors - Purple theme */
+  --chart-1: 124 58 237; /* Violet-600 */
+  --chart-2: 168 85 247; /* Purple-500 */
+  --chart-3: 192 132 252; /* Purple-400 */
+  --chart-4: 221 214 254; /* Violet-200 */
+  --chart-5: 139 92 246; /* Violet-500 */
 }
 
 .dark {
@@ -49,6 +56,13 @@
   --border: 75 85 99; /* Gray-600 */
   --input: 75 85 99; /* Gray-600 */
   --ring: 168 85 247; /* Purple-500 */
+  
+  /* Chart colors - Dark Purple theme */
+  --chart-1: 168 85 247; /* Purple-500 */
+  --chart-2: 192 132 252; /* Purple-400 */
+  --chart-3: 147 51 234; /* Purple-600 */
+  --chart-4: 107 70 193; /* Violet-700 */
+  --chart-5: 139 92 246; /* Violet-500 */
 }
 
 @layer base {
@@ -202,15 +216,62 @@
     color: transparent !important;
   }
   
-  /* Override any yellow colors */
+  /* AGGRESSIVE YELLOW COLOR ELIMINATION */
+  
+  /* Override any yellow colors - multiple formats */
   [style*="yellow"], 
+  [style*="Yellow"],
+  [style*="YELLOW"],
+  [style*="#ffff00"],
+  [style*="#FFFF00"], 
+  [style*="rgb(255,255,0)"],
+  [style*="rgb(255, 255, 0)"],
+  [style*="hsl(60,100%,50%)"],
   [class*="yellow"],
   .text-yellow-500,
   .text-yellow-600,
   .bg-yellow-500,
-  .bg-yellow-600 {
+  .bg-yellow-600,
+  .border-yellow-500,
+  .border-yellow-600 {
     color: rgb(124, 58, 237) !important;
     background-color: transparent !important;
+    border-color: rgb(124, 58, 237) !important;
+  }
+  
+  /* Override Recharts default yellow colors */
+  .recharts-wrapper *[fill="#ffff00"],
+  .recharts-wrapper *[fill="#FFFF00"],
+  .recharts-wrapper *[fill="yellow"],
+  .recharts-wrapper *[stroke="#ffff00"],
+  .recharts-wrapper *[stroke="#FFFF00"],
+  .recharts-wrapper *[stroke="yellow"] {
+    fill: rgb(124, 58, 237) !important;
+    stroke: rgb(124, 58, 237) !important;
+  }
+  
+  /* Override react-circular-progressbar yellow */
+  .CircularProgressbar .CircularProgressbar-path[stroke="#ffff00"],
+  .CircularProgressbar .CircularProgressbar-path[stroke="#FFFF00"],
+  .CircularProgressbar .CircularProgressbar-path[stroke="yellow"] {
+    stroke: rgb(124, 58, 237) !important;
+  }
+  
+  /* Force any element with yellow background to purple */
+  *[style*="background-color: #ffff00"],
+  *[style*="background-color: #FFFF00"],
+  *[style*="background-color: yellow"],
+  *[style*="backgroundColor: #ffff00"],
+  *[style*="backgroundColor: #FFFF00"],
+  *[style*="backgroundColor: yellow"] {
+    background-color: rgb(124, 58, 237) !important;
+  }
+  
+  /* Force any element with yellow text to purple */
+  *[style*="color: #ffff00"],
+  *[style*="color: #FFFF00"], 
+  *[style*="color: yellow"] {
+    color: rgb(124, 58, 237) !important;
   }
   
   /* Force proper text colors */
@@ -245,5 +306,62 @@
   body {
     background-color: rgb(255, 255, 255) !important;
     color: rgb(31, 41, 55) !important;
+  }
+  
+  /* NUCLEAR OPTION - Override any remaining yellow with maximum specificity */
+  html body * {
+    --yellow-override: rgb(124, 58, 237);
+  }
+  
+  /* HEADER/NAVIGATION SPECIFIC YELLOW ELIMINATION */
+  nav *, 
+  nav *:before, 
+  nav *:after,
+  header *,
+  header *:before,
+  header *:after {
+    color: inherit !important;
+    background-color: inherit !important;
+    border-color: inherit !important;
+    fill: inherit !important;
+    stroke: inherit !important;
+  }
+  
+  /* Force any yellow in navigation to purple */
+  nav *[style*="yellow"],
+  nav *[style*="#ffff00"],
+  nav *[style*="#FFFF00"],
+  nav *[class*="yellow"],
+  header *[style*="yellow"],
+  header *[style*="#ffff00"], 
+  header *[style*="#FFFF00"],
+  header *[class*="yellow"] {
+    color: #7C3AED !important;
+    background-color: transparent !important;
+    border-color: #7C3AED !important;
+    fill: #7C3AED !important;
+    stroke: #7C3AED !important;
+  }
+  
+  /* Override any SVG elements that might have yellow fills */
+  svg *[fill="#ffff00"],
+  svg *[fill="#FFFF00"],
+  svg *[fill="yellow"],
+  svg path[fill="#ffff00"],
+  svg path[fill="#FFFF00"], 
+  svg path[fill="yellow"],
+  svg circle[fill="#ffff00"],
+  svg circle[fill="#FFFF00"],
+  svg circle[fill="yellow"] {
+    fill: rgb(124, 58, 237) !important;
+  }
+  
+  svg *[stroke="#ffff00"],
+  svg *[stroke="#FFFF00"],
+  svg *[stroke="yellow"],
+  svg path[stroke="#ffff00"],
+  svg path[stroke="#FFFF00"],
+  svg path[stroke="yellow"] {
+    stroke: rgb(124, 58, 237) !important;
   }
 }
